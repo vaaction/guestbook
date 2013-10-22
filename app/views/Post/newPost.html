@@ -1,0 +1,28 @@
+#{extends 'main.html' /}
+#{set title:'Post - Guest Book' /}
+
+<script src="@{'/public/javascripts/views/newPost.js'}"></script>
+
+<div>
+    <h1 class="text-center">
+        New Post
+    </h1>
+
+    #{ifErrors}
+        <p class="text-error">
+            ${errors[0]}
+        </p>
+    #{/ifErrors}
+
+    #{form @Post.savePost()}
+        <p style="padding: 0;">
+            <label for="title">Title: </label>
+            <input maxlength="100" class="input-xxlarge" type="text" name="title" id="title" value="${params.title}" />
+
+            <label for="content">Message: </label>
+            <textarea rows="15" name="content" id="content">${params.content}</textarea>
+        </p>
+        <input class="submit btn btn-primary" type="submit" value="Save" />
+        <a class="btn btn-link" href="/">Cancel</a>
+    #{/form}
+</div>

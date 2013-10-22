@@ -1,0 +1,37 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li>
+                    <a class="brand" href="/">Guest Book</a>
+                </li>
+                <li class="divider-vertical"></li>
+                #{if _user}
+                    <li>
+                        <a href="@{Post.newPost()}">New Post</a>
+                    </li>
+                #{/if}
+            </ul>
+
+            <div class="nav-collapse collapse pull-right">
+                <ul class="nav">
+                    #{if _user}
+                        <li>
+                            <a class="user">${_user}</a>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    #{/if}
+                    #{else}
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    #{/else}
+                </ul>
+            </div>
+            <div class="clearfix" />
+        </div>
+    </div>
+</div>

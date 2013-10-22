@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'Home - Guest Book' /}
+
+<div>
+    <h1 class="text-center">
+        Posts
+    </h1>
+
+    #{if posts.size()}
+        #{list items:posts, as:'post'}
+            #{message post:post, user:user/}
+        #{/list}
+    #{/if}
+
+    #{else}
+        <div>
+            No posts yet
+        </div>
+    #{/else}
+</div>

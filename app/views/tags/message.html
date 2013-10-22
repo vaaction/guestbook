@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    var VOTE = {
+        LIKE : {name: "LIKE", action: "plus"},
+        UNLIKE: {name: "UNLIKE", action: "minus"}
+    };
+
+    function vote(postId) {
+        var vote = null
+        if (postId.indexOf(VOTE.LIKE.action) >= 0) {
+            vote = VOTE.LIKE
+        } else {
+            vote = VOTE.UNLIKE
+        }
+
+        var id = postId.substring(vote.action.length + 1, postId.length)
+        var postProgressRoute = #{jsRoute @Home.vote(':id', ':status') /}
+
+        $.ajax({
+            url: postProgressRoute.url({id: id, status: vote.name}),
+            type: postProgressRoute.method,
+            success: function (score) {
+                $("#progress_" + id).html(score)
+            }
+        });
+    };
+</script>
+
+<div>
+    <h3>
+        ${_post.title}
+    </h3>
+    <blockquote class="text-info">
+        ${_post.content.raw()}
+    </blockquote>
+
+    <small class="muted">
+        ${_post.author.fullName}, ${_post.postedDate.format('dd MMM yy')}
+        #{if _user}
+            <button onclick="vote('plus_${_post.id}')" class="btn btn-mini"><i class="icon-arrow-up"></i></button>
+            <span id="progress_${_post.id}">${_post.score()}</span>
+            <button onclick="vote('minus_${_post.id}')" class="btn btn-mini"><i class="icon-arrow-down"></i></button>
+        #{/if}
+        #{else}
+            <button disabled="true" class="btn btn-mini"><i class="icon-arrow-up"></i></button>
+            <span id="progress_${_post.id}">${_post.score()}</span>
+            <button disabled="true" class="btn btn-mini"><i class="icon-arrow-down"></i></button>
+        #{/else}
+    </small>
+</div>

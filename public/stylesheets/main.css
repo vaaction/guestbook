@@ -1,0 +1,12 @@
+.layout {
+    margin-top: 50px
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px
+}
+
+.navbar .user {
+    cursor: default;
+}

@@ -1,0 +1,20 @@
+#{selenium}
+    // Open the home page, and check that no error occured
+    open('/')
+    assertNotTitle('Application error')
+#{/selenium}
+
+#{selenium}
+    // Open the home page, and check that no error occured
+    open('/post/new')
+    assertNotTitle('Application error')
+#{/selenium}
+
+#{selenium}
+    // Open the home page, and check that no error occured
+    open('/post/new')
+    type('title','title')
+    assertText('title')
+    type('content', 'content')
+    assertText('content')
+#{/selenium}
